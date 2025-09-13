@@ -25,6 +25,10 @@ public class ProductRepo {
      */
     public Product getProduct(String id) throws RuntimeException {// Create a NotFound Exception
         Product product = null;
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Logistic");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        product = entityManager.find(Product.class, id);
+
         for (Product tmpProduct : productList) {
             if (tmpProduct.getId().equalsIgnoreCase(id)) {
                 product = tmpProduct;
@@ -37,6 +41,9 @@ public class ProductRepo {
             logger.warn("Product with id: " + id + " not found in database");
             throw new RuntimeException("The product with id " + id + " Not Found");
         }
+
+        entityManager.close();
+        entityManagerFactory.close();
 
         return product;
 
