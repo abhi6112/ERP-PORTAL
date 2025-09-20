@@ -69,7 +69,9 @@ public class TransactionInterface {
             // Setting the transaction type when user select the correct option between 1-2
             // Usend enum class for transaction type
             System.out.println("Enter Transaction Type: ");
-            TransactionType.choose(transaction);
+            transaction.setTxnType(TransactionType.DEBIT.name());
+            System.out.print("Transaction type is : DEBIT ");
+            sc.nextLine();
 
             // Setting the Payment mode when the user select the options
             // Usend Enum for the payment mode.
